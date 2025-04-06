@@ -10,16 +10,16 @@ const conn = new jsforce.Connection({
 });
 
 
- conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, (err, userInfo) => {
-        console.log("Entrou")
-        if (err) {
-            console.log(err)
-        }
-        else {
-            console.log("User ID: " + userInfo.id)
-            console.log("ORG: " + userInfo.organizationId)
-        }
-    });
+conn.login(SF_USERNAME, SF_PASSWORD + SF_TOKEN, (err, userInfo) => {
+    console.log("Entrou")
+    if (err) {
+        console.log(err)
+    }
+    else {
+        console.log("User ID: " + userInfo.id)
+        console.log("ORG: " + userInfo.organizationId)
+    }
+});
 
 // (async () =>{})
 
