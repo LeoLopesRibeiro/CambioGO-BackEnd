@@ -1,13 +1,29 @@
 require('dotenv').config()
 const express = require('express');
-const conn = require('./conexao')
+// const conn = require('./conexao')
 const app = express();
 const { PORT } = process.env;
-const rotaCliente = require('./routes/clientes.routes.js');
+const rotaAccounts = require('./routes/accounts.routes.js');
 
 
 app.use(express.json())
-app.use("/clientes", rotaCliente);
+app.use("/accounts", rotaAccounts);
+
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    )
+
+    if(req.method === "OPTIONS"){
+        res.header("Acess-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH")
+        return res.status(200).send({})
+    }
+
+    next()
+});
+
+
 app.use("/", (req, res, next)=>{
     return res.status(200).send({mensagem: 'API funcionando'})
 })
