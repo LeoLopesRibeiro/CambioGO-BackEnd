@@ -119,7 +119,9 @@ router.post("/login", (req, res) => {
           if (error) {
             return res.status(401).send({ message: "Falha na autenticação!" });
           }
-          if (results) {
+          if(!results){
+            return res.status(401).send({ message: "Login invalido!" });
+          }else{
             console.log(records);
             const token = jwt.sign(
               {
